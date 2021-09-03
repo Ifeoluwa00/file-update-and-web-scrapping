@@ -6,7 +6,7 @@ implement your server code here
 */
 
 const server: Server = http.createServer((req: IncomingMessage, res: ServerResponse) => {
-  console.log(req.url,  req.url?.split("/").slice(-1)[0]);
+  //console.log(req.url,  req.url?.split("/").slice(-1)[0]);
   if (req.url === "/api/products" && req.method === "GET") {
       controller.getProducts(req, res)
   }
@@ -35,6 +35,8 @@ const server: Server = http.createServer((req: IncomingMessage, res: ServerRespo
     }
   }
 );
+
+
 const PORT= process.env.PORT || 3005
 server.listen(3005, ()=> console.log(`Server running on port ${PORT}`)); 
  

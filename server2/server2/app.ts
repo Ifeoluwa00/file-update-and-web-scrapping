@@ -1,7 +1,5 @@
 import http, { IncomingMessage, Server, ServerResponse } from "http";
-import fs from 'fs'
 import  request  from "request";
-import cheerrio from "cheerio";
 import jsdom from "jsdom"
 import url from 'url';
 /*
@@ -24,9 +22,9 @@ const server: Server = http.createServer(
             console.log(typeof body)
            
             let dom = new JSDOM(body);
-            let imgUrls = Array.from(dom.window.document.querySelectorAll('img')).map(img => img?.getAttribute('src')).filter(imgurl =>  imgurl?.toString() );
+            let imgUrls = Array.from( dom.window.document.querySelectorAll('img') ).map(img => img?.getAttribute('src')).filter(imgurl =>  imgurl?.toString() );
             let title = dom.window.document.querySelector('title')?.textContent;
-            let description = dom.window.document.querySelector('meta[name="description"]')
+            let description = dom.window.document.querySelector('meta[name="description"]')?.getAttribute('content')
             res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({
               title,
